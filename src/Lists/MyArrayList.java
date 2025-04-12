@@ -34,7 +34,9 @@ public class MyArrayList<T> implements MyList<T> {
 
     private void increaseBuffer() {
         Object[] newElements = new Object[length * 2];
-        System.arraycopy(elements, 0, newElements, 0, length);
+        for (int i = 0; i < length; i++) {
+            newElements[i] = elements[i];
+        }
         elements = newElements;
     }
 
