@@ -1,0 +1,33 @@
+package Lists;
+
+public class MyStack<T> {
+    private MyList<T> list;
+
+    public MyStack() {
+        list = new MyArrayList<>();
+    }
+
+    public void push(T item) {
+        list.add(item);
+    }
+
+    public T pop() {
+        if (list.isEmpty()) throw new IllegalStateException("stack is empty");
+        T item = list.get(list.size() - 1);
+        list.remove(list.size() - 1);
+        return item;
+    }
+
+    public T peek() {
+        if (list.isEmpty()) throw new IllegalStateException("stack is empty");
+        return list.get(list.size() - 1);
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public int size() {
+        return list.size();
+    }
+}
