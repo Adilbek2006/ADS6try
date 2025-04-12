@@ -16,17 +16,26 @@ public class MyArrayList<T> implements MyList<T> {
         }
         elements[length++] = item;
     }
-    private void increaseBuffer() {
-        Object[] newElements = new Object[length * 2];
-        for (int i = 0; i < elements.length; i++) {
-            newElements[i] = elements[i];
-        }
-        elements = newElements;
-    }
 
     @Override
-    public int size() {
-        return length;
+    public void add(int index, T item) {
+        if (index < 0 || index > length) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (length == elements.length) {
+            increaseBuffer();
+        }
+        for (int i = length; i > index; i--) {
+            elements[i] = elements[i - 1];
+        }
+        elements[index] = item;
+        length++;
+    }
+
+    private void increaseBuffer() {
+        Object[] newElements = new Object[length * 2];
+        System.arraycopy(elements, 0, newElements, 0, length);
+        elements = newElements;
     }
 
     @Override
@@ -35,22 +44,16 @@ public class MyArrayList<T> implements MyList<T> {
         return (T) elements[index];
     }
 
-    private void checkIndex(int index) {
-        if (index < 0 || index >= length) {
-            throw new IndexOutOfBoundsException("index: " + index + ", size: " + length);
-        }
-    }
-
-
     @Override
     public void remove(int index) {
         checkIndex(index);
         for (int i = index; i < length - 1; i++) {
             elements[i] = elements[i + 1];
         }
-        length--;
+        elements[--length] = null;
     }
 
+    @Override
     public boolean remove(T item) {
         for (int i = 0; i < length; i++) {
             if (elements[i].equals(item)) {
@@ -61,4 +64,42 @@ public class MyArrayList<T> implements MyList<T> {
         return false;
     }
 
+    @Override
+    public int size() {
+        return length;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return length == 0;
+    }
+
+    @Override
+    public void clear() {
+        elements = new Object[5];
+        length = 0;
+    }
+
+    @Override
+    public java.util.Iterator<T> iterator() {
+        return new java.util.Iterator<>() {
+            private int current = 0;
+
+            @Override
+            public boolean hasNext() {
+                return current < length;
+            }
+
+            @Override
+            public T next() {
+                return (T) elements[current++];
+            }
+        };
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
 }
