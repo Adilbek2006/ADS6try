@@ -1,5 +1,7 @@
 package Lists;
 
+import java.util.Iterator;
+
 public class MyLinkedList<T> implements MyList<T> {
 
     private MyNode<T> head;
@@ -87,6 +89,7 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
+
     @Override
     public void remove(int index) {
         checkIndex(index);
@@ -118,8 +121,35 @@ public class MyLinkedList<T> implements MyList<T> {
 
 
     @Override
+    public void clear() {
+        head = tail = null;
+        length = 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return length == 0;
+    }
+
+    @Override
     public int size() {
         return length;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private MyNode<T> current = head;
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+            @Override
+            public T next() {
+                T data = current.data;
+                current = current.next;
+                return data;
+            }
+        };
+    }
 }
