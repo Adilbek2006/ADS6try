@@ -2,6 +2,21 @@ package Lists;
 
 import java.util.Iterator;
 
+/**
+ * A custom implementation of a singly linked list.
+ * Elements are stored in nodes, each pointing to the next one.
+ *
+ * Time complexity:
+ * - add: O(n) (traverse to end)
+ * - get: O(n)
+ * - remove: O(n)
+ * - clear: O(1)
+ * - size: O(1)
+ *
+ * @param <T> The type of elements stored in the list.
+ */
+
+
 public class MyLinkedList<T> implements MyList<T> {
 
     private MyNode<T> head;

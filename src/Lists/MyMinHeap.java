@@ -1,5 +1,19 @@
 package Lists;
 
+/**
+ * A custom implementation of a min-heap priority queue.
+ * The minimum element is always at the top (root).
+ *
+ * Time complexity:
+ * - add: O(log n) (heapify up)
+ * - remove: O(log n) (heapify down)
+ * - peek: O(1)
+ * - size: O(1)
+ *
+ * @param <T> The type of elements stored in the heap, must be comparable.
+ */
+
+
 public class MyMinHeap {
     private MyArrayList<Integer> heap;
 

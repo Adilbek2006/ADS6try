@@ -1,5 +1,20 @@
 package Lists;
 
+/**
+ * A custom implementation of a dynamic array-based list.
+ * This list automatically resizes when capacity is reached.
+ *
+ * Time complexity:
+ * - add: O(1) amortized (due to resizing)
+ * - get: O(1)
+ * - remove: O(n) in worst case (elements are shifted)
+ * - clear: O(1)
+ * - size: O(1)
+ *
+ * @param <T> The type of elements stored in the list.
+ */
+
+
 public class MyArrayList<T> implements MyList<T> {
     private Object[] elements;
     private int length;
